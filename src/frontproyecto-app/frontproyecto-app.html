@@ -1,0 +1,42 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="frontproyecto-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <input type="text" value="{{nombre::input}}"/>
+    <input type="text" value="[[nombre]]"/>
+    <h2>Soy {{nombre}} [[apellidos]]</h2>
+    <h2>Soy [[nombre]] [[apellidos]]</h2>
+    <input type="number" min="18" max="70" value="{{edad::input}}"/>
+    <h3>y tengo [[edad]] años</h3>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class FrontproyectoApp extends Polymer.Element {
+      static get is() { return 'frontproyecto-app'; }
+      static get properties() {
+        return {
+          nombre: {
+            type: String
+          },
+          apellidos: {
+            type: String
+          },
+          edad: {
+            type: Number
+          }
+        };
+      }
+    }
+
+    window.customElements.define(FrontproyectoApp.is, FrontproyectoApp);
+  </script>
+</dom-module>

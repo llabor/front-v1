@@ -1,0 +1,7 @@
+{
+  "name": "frontproyecto",
+  "short_name": "frontproyecto",
+  "description": "la mejor del mundo",
+  "start_url": "/",
+  "display": "standalone"
+}
