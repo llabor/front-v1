@@ -1,0 +1,74 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+
+
+<dom-module id="visor-cuentas">
+  <template>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      :host {
+        display: block;
+
+      }
+    </style>
+    <iron-ajax id="obtenerCuentas"
+               url="http://rutaapitechu-apitechucmc.7e14.starter-us-west-2.openshiftapps.com/apitechu/v5/cuentas/cliente"
+               handle-as="json"
+               headers='{"idcliente":528}'
+               auto=""
+               on-response="mostrarCuentas"
+               on-error="mostrarErrorCuentas">
+    </iron-ajax>
+    <h1>Sus cuentas</h1>
+    <template is="dom-repeat" items="{{cuentas}}">
+      <span>{{item.iban}}</span>
+      <br/>
+
+    </br/>
+    </template>
+    <table class="table table-striped">
+      <thead><th>
+        Índice
+      </th>
+      <th>IBAN</th></thead>
+      <tbody>
+        <template is="dom-repeat" items="{{cuentas}}">
+          <tr>
+            <td>{{index}}</td>
+            <td>{{item.iban}}</td>
+            <td><a class="btn btn-info" href="/movimientos/[[item.iban]]">Ver movimientos</a></td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+
+  </template>
+
+  <script>
+    class VisorCuentas extends Polymer.Element {
+      static get is() { return 'visor-cuentas'; }
+      static get properties() {
+        return {
+          idcliente: {
+            type: Number,
+            value: 528
+          },
+          cuentas: {
+            type: Array
+          }
+        };
+      }
+      mostrarCuentas(resultado) {
+        console.log(resultado.detail.response)
+        this.cuentas = resultado.detail.response
+      }
+      mostrarErrorCuentas(error) {
+        console.log(error.detail.response)
+      }
+    }
+
+    window.customElements.define(VisorCuentas.is, VisorCuentas);
+  </script>
+</dom-module>

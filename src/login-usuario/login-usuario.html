@@ -1,0 +1,72 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="login-usuario">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+      <iron-ajax id="hacerLogin"
+                 url="http://rutaapitechu-apitechucmc.7e14.starter-us-west-2.openshiftapps.com/apitechu/v5/login"
+                 method="POST"
+                 handle-as="json"
+                 on-response="mostrarResultadoLogin"
+                 on-error="mostrarError">
+      </iron-ajax>
+
+      <div class="row">
+        <input type="email" value={{email::input}} />
+        <input type="password" value={{password::input}} />
+        <button on-click="logar">Login</button>
+      </div>
+      <span hidden$="{{!logado}}">Bienvenido de nuevo</span>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class LoginUsuario extends Polymer.Element {
+      static get is() { return 'login-usuario'; }
+      static get properties() {
+        return {
+          email: {
+            type: String
+          },
+          password: {
+            type: String
+          },
+          logado: {
+            type: Boolean,
+            value: false
+          }
+        };
+      }
+      mostrarResultadoLogin(resultado) {
+        console.log("4. Llegaron los resultados")
+        console.log(resultado)
+        console.log("5. Proceso los resultados")
+        this.logado = true
+      }
+      logar() {
+        console.log("1. El usuario ha pulsado el botón")
+        this.$.hacerLogin.headers.email = this.email
+        this.$.hacerLogin.headers.password = this.password
+        console.log("2. Voy a enviar la petición")
+        this.$.hacerLogin.generateRequest()
+        console.log("3. Petición enviada")
+      }
+      mostrarError(error) {
+        console.log("4. Llega el error")
+        console.log(error)
+        this.logado = false
+      }
+    }
+
+    window.customElements.define(LoginUsuario.is, LoginUsuario);
+  </script>
+</dom-module>
