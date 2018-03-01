@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="emisor-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h1>Soy el emisor</h1>
+    <button on-click="enviarEvento">Púlsame</button>
+  </template>
+
+  <script>
+    /**
+     * `page-not-found`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class EmisorApp extends Polymer.Element {
+      static get is() { return 'emisor-app'; }
+      static get properties() {
+        return {
+        };
+      }
+      enviarEvento(e)
+      {
+        console.log("ON-CLICK", "Alguien ha pulsado el botón")
+        console.log(e)
+        this.dispatchEvent(new CustomEvent("mievento", {"detail":{"curso":"TechU", "anno":2018 }}))
+      }
+    }
+
+    window.customElements.define(EmisorApp.is, EmisorApp);
+  </script>
+</dom-module>

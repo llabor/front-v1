@@ -18,6 +18,7 @@
     <link rel="import" href="/src/login-usuario/login-usuario.html">
         <link rel="import" href="/src/visor-cuentas/visor-cuentas.html">
     <link rel="import" href="/bower_components/app-router/app-router.html">
+    <link rel="import" href="/src/padre-app/padre-app.html">
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -61,7 +62,8 @@
 
   </br/>
         <h1>Bienvenido a su banco</h1>
-        <visor-cuentas></visor-cuentas>
+        <padre-app></padre-app>
+        <!--<visor-cuentas></visor-cuentas>-->
         <app-router>
           <app-route path="/"></app-route>
           <app-route path="/login" import="/src/login-usuario/login-usuario.html"></app-route>

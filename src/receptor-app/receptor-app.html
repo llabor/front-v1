@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="receptor-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h1>Receptor</h1>
+    <h2>{{prop1}}</h2>
+    <h3>{{prop2}}</h3>
+  </template>
+
+  <script>
+    /**
+     * `page-not-found`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ReceptorApp extends Polymer.Element {
+      static get is() { return 'receptor-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: "Prop1"
+          },
+          prop2: {
+            type: String,
+            value: "Prop2"
+          }
+        };
+      }
+      mostrarDatos(datos) {
+        console.log(datos)
+        this.prop1 = datos.curso
+        this.prop2 = datos.anno
+      }
+    }
+
+    window.customElements.define(ReceptorApp.is, ReceptorApp);
+  </script>
+</dom-module>

@@ -1,0 +1,41 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="/src/emisor-app/emisor-app.html">
+<link rel="import" href="/src/receptor-app/receptor-app.html">
+
+<dom-module id="padre-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h1>Yo soy tu padre</h1>
+    <emisor-app id="emi" on-mievento="procesar"></emisor-app>
+    <receptor-app id="recep"></receptor-app>
+  </template>
+
+  <script>
+    /**
+     * `page-not-found`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class PadreApp extends Polymer.Element {
+      static get is() { return 'padre-app'; }
+      static get properties() {
+        return {
+        };
+      }
+      procesar(e) {
+        console.log("Emisor me ha dicho algo")
+        console.log(e)
+        this.$.recep.mostrarDatos(e.detail)
+      }
+    }
+
+    window.customElements.define(PadreApp.is, PadreApp);
+  </script>
+</dom-module>
